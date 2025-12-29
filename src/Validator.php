@@ -30,7 +30,7 @@ class Validator
     public static function isValid($xml, $xsd)
     {
         if (!self::isXML($xml)) {
-            throw ValidatorException::isNotXml();
+            return ValidatorException::isNotXml();
         }
         libxml_use_internal_errors(true);
         libxml_clear_errors();
@@ -44,7 +44,7 @@ class Validator
             foreach (libxml_get_errors() as $error) {
                 $errors[] = $error->message;
             }
-            throw ValidatorException::xmlErrors($errors);
+            return ValidatorException::xmlErrors($errors);
         }
         return true;
     }
